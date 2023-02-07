@@ -1,3 +1,25 @@
 ---
-- debug:
-    msg: "Hello from your external use case!"
+# Certain values are only templated as a first step, their
+# deployment is skipped.
+# This speeds up the overall deployment process as such tools
+# are not installed all over again for each demo
+- set_fact:
+    jenkins_skip_install: True
+    dashboard_skip_install: True
+
+- include_role:
+    name: demo-quality-gates-jenkins
+
+- include_role:
+    name: demo-security-gates-jenkins
+
+- include_role:
+    name: demo-quality-gates-gitlab
+
+# Last role also installs Jenkins, Dashboard, ...
+- set_fact:
+    jenkins_skip_install: False
+    dashboard_skip_install: False
+
+- include_role:
+    name: demo-monaco-gitops
