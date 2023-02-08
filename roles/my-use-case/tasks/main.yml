@@ -13,13 +13,10 @@
 - include_role:
     name: demo-security-gates-jenkins
 
-- include_role:
-    name: demo-quality-gates-gitlab
-
 # Last role also installs Jenkins, Dashboard, ...
 - set_fact:
     jenkins_skip_install: False
     dashboard_skip_install: False
 
 - include_role:
-    name: demo-monaco-gitops
+    name: demo-quality-gates-gitlab
